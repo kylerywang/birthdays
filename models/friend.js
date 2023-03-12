@@ -42,19 +42,14 @@ friendSchema.statics.getFriends = function (userId){
 
 //methods
 friendSchema.methods.requiresNotification = function(date) {
-    // const nextBirthdayPST = moment(this.nextBirthday).tz('America/Los_Angeles');
-    const fiveMinFromNow = moment(date).tz('America/Los_Angeles').add(2, 'minutes');
-    const currentDatePST = moment(date).tz('America/Los_Angeles');
-    const duration = moment.duration(fiveMinFromNow.diff(currentDatePST));
-    // const duration = moment.duration(nextBirthdayPST.diff(currentDatePST));
-    const durationInMinutes = Math.round(duration.asMinutes());
-    return durationInMinutes === 0; // Change this value to 5 or however many minutes you want to test for
+    return true;
   };
 
 friendSchema.statics.sendNotifications = function(callback) {
     const searchDate = new Date();
     Friend
       .find()
+      .populate('user')
       .then(function(friends) {
         friends = friends.filter(function(friend) {
                 return friend.requiresNotification(searchDate);
@@ -66,14 +61,13 @@ friendSchema.statics.sendNotifications = function(callback) {
 }
 
 function sendNotifications(friends) {
-    const client = new Twilio(cfg.twilioAccountSid, cfg.twilioAuthToken);
+    const client = new Twilio(cfg.twilio.accountSid, cfg.twilio.authToken);
     friends.forEach(function(friend) {
-            // Create options to send the message
         const options = {
-            to: `+ ${friend.user.phone}`,
-            from: cfg.twilioPhoneNumber,
+            to: `+1${friend.user.phone}`,
+            from: cfg.twilio.phoneNumber,
             /* eslint-disable max-len */
-            body: `It's ${friend.name}'s Birthday!`,
+            body: `${friend.name}`,
             /* eslint-enable max-len */
         };
 
@@ -84,21 +78,21 @@ function sendNotifications(friends) {
                 console.error(err);
             } else {
                 // Log the last few digits of a phone number
-                let masked = friend.user.phoneNumber.substr(0,
-                    friend.user.phoneNumber.length - 5);
+                let masked = friend.user.phone.substr(0,
+                    friend.user.phone.length - 5);
                 masked += '*****';
-                console.log(`Message sent to ${masked}`);
+                console.log(`Message for ${friend.name} sent to ${masked}`);
             }
         });
-        });
+    });
+
         // Don't wait on success/failure, just indicate all messages have been
         // queued for delivery
-        if (callback) {
-          callback.call();
-        }
+        // if (callback) {
+        //   callback.call();
+        // }
     }
 
+const Friend = mongoose.model('Friend', friendSchema);
 
-
-
-module.exports = mongoose.model('Friend', friendSchema);
+module.exports = Friend;

@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const schedulerFactory = require('./twilio/scheduler'); // import the scheduler factory
+
 // Always require and configure near the top
 require('dotenv').config();
 // Connect to the database
@@ -22,6 +24,11 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(require('./config/checkToken'));
 
 const port = process.env.PORT || 3001;
+
+
+const scheduler = schedulerFactory();
+
+scheduler.start();
 
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));

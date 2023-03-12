@@ -16,4 +16,4 @@ const schedulerFactory = function() {
   };
 };
 
-module.exports = schedulerFactory();
+module.exports = schedulerFactory;
