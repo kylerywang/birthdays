@@ -30,9 +30,9 @@ friendSchema.virtual('nextBirthday').get(function(){
     return nextBirthday.toISOString();
   });
 
-friendSchema.virtual('daysUntil').get(function(){
-    return Math.floor((this.nextBirthday.getTime() - Date.now() )/ (1000 *60*60*24));
-})
+// friendSchema.virtual('daysUntil').get(function(){
+//     return Math.floor((this.nextBirthday.getTime() - Date.now() )/ (1000 *60*60*24));
+// })
 
 
 
@@ -97,9 +97,12 @@ function sendNotifications(friends) {
         // }
     }
 
-friendSchema.statics.getFriends = function (userId){
-    return this.find(
+friendSchema.statics.getFriends = async function (userId){
+    userFriends = await this.find(
         {user: userId})
+    console.log("userId:", userId)
+    console.log("userFriends:", userFriends)
+    return userFriends
 };
 
 const Friend = mongoose.model('Friend', friendSchema);

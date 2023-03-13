@@ -7,7 +7,7 @@ const moment = require('moment');
 const schedulerFactory = function() {
   return {
     start: function() {
-      new CronJob('00 * * * * *', function() {
+      new CronJob('0 0 * * *', function() {
         console.log('Running Send Notifications Worker for ' +
           moment().format());
         notificationsWorker.run();

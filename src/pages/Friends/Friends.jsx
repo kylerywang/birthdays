@@ -28,15 +28,29 @@ export default function Friends({friends, setFriends, user}) {
           }
     }
 
-
-    return (
-        <>
-            <NewFriendForm addFriend = {addFriend} user={user}/>
+    return(
+    <div>
+        <NewFriendForm addFriend = {addFriend} user={user}/>
+        <h1>Friends</h1>
+        <div class="rounded-lg border border-gray-200">
             <ul>
                 {friends.map((friend)=>(
                     <FriendCard friend={friend} key={friend.id} deleteFriend={deleteFriend}/>
                 ))}
             </ul>
-        </>
+        </div>
+    </div>
     )
+    
 }
+
+// return (
+//     <>
+//         <NewFriendForm addFriend = {addFriend} user={user}/>
+//         <ul>
+//             {friends.map((friend)=>(
+//                 <FriendCard friend={friend} key={friend.id} deleteFriend={deleteFriend}/>
+//             ))}
+//         </ul>
+//     </>
+// )

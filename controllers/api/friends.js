@@ -9,7 +9,9 @@ module.exports = {
 }
 
 async function getAll(req, res) {
-    const friends = await Friend.getFriends(req.user_id);
+    const friends = await Friend.getFriends(req.user._id);
+    console.log("req.user", req.user)
+    // console.log("req in getAll(): ", req )
     res.json(friends)
 }
 

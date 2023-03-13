@@ -1,8 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities; 
+/* CSS Custom Properties */
 
+:root {
+  --white: #FFFFFF;
+  --tan-1: #FBF9F6;
+  --tan-2: #E7E2DD;
+  --tan-3: #E2D9D1;
+  --tan-4: #D3C1AE;
+  --orange: #F67F00;
+  --text-light: #968c84;
+  --text-dark: #615954;
+}
 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -11,8 +22,8 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: white;
-
+  padding: 2vmin;
+  height: 100vh;
 }
 
 code {
@@ -67,12 +78,14 @@ code {
   font-size: 2vmin;
 }
 
+
 p.error-message {
   color: var(--orange);
   text-align: center;
 }
 
-
+form {
+}
 
 label {
   font-size: 2vmin;
@@ -82,9 +95,46 @@ label {
 
 input {
 
-  background-image: none !important; /* prevent lastpass */
+  background-image: none !important;
+  /* prevent lastpass */
+  outline: none;
 }
 
 input:focus {
   border-color: var(--orange);
+}
+
+button, a.button {
+  margin: 1vmin;
+  padding: 1vmin;
+  color: var(--white);
+  background-color: var(--orange);
+  font-size: 2vmin;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  border: .1vmin solid var(--tan-2);
+  border-radius: .5vmin;
+  outline: none;
+  cursor: pointer;
+}
+
+button.btn-sm {
+  font-size: 1.5vmin;
+  padding: .6vmin .8vmin;
+}
+
+button.btn-xs {
+  font-size: 1vmin;
+  padding: .4vmin .5vmin;
+}
+
+button:disabled, form:invalid button[type="submit"] {
+  cursor: not-allowed;
+  background-color: var(--tan-4);
+}
+
+button[type="submit"] {
+  grid-column: span 2;
+  margin: 1vmin 0 0;
 }

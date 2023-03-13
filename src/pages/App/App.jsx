@@ -13,20 +13,22 @@ export default function App() {
   const [ friends, setFriends ]= useState([])
 
   return (
-    <main className="App">
-      {
-        user ?
-        <>
-          <NavBar user={user} setUser={setUser}/>
-          <Routes>
-            <Route path="/feed" element={<Feed friends={friends} setFriends={setFriends} user={user}/>} />
-            <Route path="/friends" element={<Friends friends={friends} setFriends={setFriends} user={user}/>} />
-            <Route path="/*" element={<Navigate to="/feed"/>}/>
-          </Routes>
-        </>
-        :
-        <AuthPage setUser={setUser} />
-      }
+    <main>
+      <div className="max-w-2xl mx-auto bg-white">
+        {
+          user ?
+          <>
+            <NavBar user={user} setUser={setUser}/>
+            <Routes>
+              <Route path="/feed" element={<Feed friends={friends} setFriends={setFriends} user={user}/>} />
+              <Route path="/friends" element={<Friends friends={friends} setFriends={setFriends} user={user}/>} />
+              <Route path="/*" element={<Navigate to="/feed"/>}/>
+            </Routes>
+          </>
+          :
+          <AuthPage setUser={setUser} />
+        }
+      </div>
     </main>
   );
 }
