@@ -100,8 +100,6 @@ function sendNotifications(friends) {
 friendSchema.statics.getFriends = async function (userId){
     userFriends = await this.find(
         {user: userId})
-    console.log("userId:", userId)
-    console.log("userFriends:", userFriends)
     return userFriends
 };
 

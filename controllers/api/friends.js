@@ -2,21 +2,13 @@ const Friend=require('../../models/friend');
 
 module.exports = {
     getAll,
-    show,
     create,
     delete: deleteFriend,
-    update,
 }
 
 async function getAll(req, res) {
     const friends = await Friend.getFriends(req.user._id);
-    console.log("req.user", req.user)
-    // console.log("req in getAll(): ", req )
     res.json(friends)
-}
-
-async function show(req,res){
-
 }
 
 
@@ -42,7 +34,4 @@ async function deleteFriend(req,res){
     
 }
 
-async function update(req, res){
-
-}
 
