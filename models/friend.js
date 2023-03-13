@@ -20,29 +20,33 @@ const friendSchema = new Schema({
 });
 
 friendSchema.virtual('nextBirthday').get(function(){
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const nextBirthday = new Date(`${currentYear}-${this.month}-${this.day}`);
-
-    if (nextBirthday < currentDate) {
-        nextBirthday.setFullYear(currentYear + 1); // Set next year's birthday date
+    const currentYear = moment().year();
+    const nextBirthday = moment(`${currentYear}-${this.birthday.month}-${this.birthday.day}`, 'YYYY-MM-DD');
+  
+    if (nextBirthday.isBefore()) {
+      nextBirthday.add(1, 'year');
     }
-
-    return nextBirthday;})
+  
+    return nextBirthday.toISOString();
+  });
 
 friendSchema.virtual('daysUntil').get(function(){
     return Math.floor((this.nextBirthday.getTime() - Date.now() )/ (1000 *60*60*24));
 })
 
-//statics
-friendSchema.statics.getFriends = function (userId){
-    return this.find(
-        {user: userId})
-};
+
 
 //methods
 friendSchema.methods.requiresNotification = function(date) {
-    return true;
+    const currentTime = moment(date);
+    const friendBirthday =moment(this.nextBirthday)
+    let timeDiffInMinutes = Math.round(moment.duration(friendBirthday.diff(currentTime)).asMinutes());
+    let timeDiffInDays = friendBirthday.diff(currentTime, 'days')
+    timeDiffInDays = timeDiffInDays % 365;
+    console.log(`${this.name}'s this.nextBirthday`, this.nextBirthday)
+    console.log(`${this.name}'s friendBirthday`, friendBirthday)
+    console.log(`${timeDiffInDays} days until ${this.name}'s birthday.`)
+    return timeDiffInDays === 0;
   };
 
 friendSchema.statics.sendNotifications = function(callback) {
@@ -67,7 +71,7 @@ function sendNotifications(friends) {
             to: `+1${friend.user.phone}`,
             from: cfg.twilio.phoneNumber,
             /* eslint-disable max-len */
-            body: `${friend.name}`,
+            body: `It's ${friend.name}'s birthday! 🎉`,
             /* eslint-enable max-len */
         };
 
@@ -92,6 +96,11 @@ function sendNotifications(friends) {
         //   callback.call();
         // }
     }
+
+friendSchema.statics.getFriends = function (userId){
+    return this.find(
+        {user: userId})
+};
 
 const Friend = mongoose.model('Friend', friendSchema);
 
