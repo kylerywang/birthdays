@@ -22,7 +22,7 @@ export default function App() {
             <Routes>
               <Route path="/feed" element={<Feed friends={friends} setFriends={setFriends} user={user}/>} />
               <Route path="/friends" element={<Friends friends={friends} setFriends={setFriends} user={user}/>} />
-              <Route path="/*" element={<Navigate to="/feed"/>}/>
+              <Route path="/*" element={<Navigate to="/friends"/>}/>
             </Routes>
           </>
           :

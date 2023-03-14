@@ -39,6 +39,7 @@ export default class SignUpForm extends Component {
     const disable = this.state.password !== this.state.confirm;
     return (
       <div className="w-full max-w">
+        <h1 className="font-bold text-gray-900 text-2xl m-4">Sign Up</h1>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" autoComplete="off" onSubmit={this.handleSubmit}>
           <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -62,19 +63,19 @@ export default class SignUpForm extends Component {
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Password
               </label>
-              <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-              <p className="text-red-500 text-xs italic">Please choose a password.</p>
+              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+              <p className="text-gray-500 text-xs italic">Please choose a password.</p>
             </div>
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Confirm
               </label>
-              <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
-              <p className="text-red-500 text-xs italic">Please confirm your password.</p>
+              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
+              <p className="text-gray-500 text-xs italic">Please confirm your password.</p>
             </div>
             <div className="flex items-center justify-between">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={disable}>
-                Sign In
+                Sign Up
               </button>
             </div>
         </form>

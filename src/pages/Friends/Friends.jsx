@@ -32,7 +32,7 @@ export default function Friends({friends, setFriends, user}) {
     <div>
         <NewFriendForm addFriend = {addFriend} user={user}/>
         <h1>Friends</h1>
-        <div class="rounded-lg border border-gray-200">
+        <div className="rounded-lg border border-gray-200">
             <ul>
                 {friends.map((friend)=>(
                     <FriendCard friend={friend} key={friend.id} deleteFriend={deleteFriend}/>
