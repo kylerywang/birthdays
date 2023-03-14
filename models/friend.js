@@ -35,11 +35,28 @@ friendSchema.virtual('daysUntil').get(function(){
     
 })
 
+friendSchema.statics.getFriends = async function (userId){
+    userFriends = await this.find(
+        {user: userId})
+    
+    userFriends.sort((a, b) => {
+        if (a.nextBirthday < b.nextBirthday) {
+            return -1;
+        }
+        if (a.nextBirthday > b.nextBirthday) {
+            return 1;
+        }
+            return 0;
+        });
+    return userFriends
+};
 
+friendSchema.statics.getFeed = async function (users){
+    
+};
 
 //methods
 friendSchema.methods.requiresNotification = function(date) {
-
     console.log(`${this.daysUntil} days until ${this.name}'s birthday.`)
     return this.daysUntil === 0;
   };
@@ -93,11 +110,7 @@ function sendNotifications(friends) {
         // }
     }
 
-friendSchema.statics.getFriends = async function (userId){
-    userFriends = await this.find(
-        {user: userId})
-    return userFriends
-};
+
 
 const Friend = mongoose.model('Friend', friendSchema);
 
