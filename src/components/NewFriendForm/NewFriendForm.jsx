@@ -33,7 +33,7 @@ export default function NewFriendForm({ addFriend, user }) {
             onChange={(evt) => setNewFriend({...newFriend, name: evt.target.value})}
             placeholder="Name"
             required
-            pattern=".{4,}" />
+            pattern=".{2,}" />
             <p class="text-gray-600 text-xs italic"></p>
             </div>
         </div>
@@ -42,7 +42,10 @@ export default function NewFriendForm({ addFriend, user }) {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
                 Birthday Month
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number"
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                type="number"
+                min="1" 
+                max="12"
                 value={newFriend.birthday.month}
                 onChange={(evt) => setNewFriend({...newFriend, birthday: {...newFriend.birthday, month: evt.target.value}})}
                 placeholder="Month"
@@ -53,7 +56,10 @@ export default function NewFriendForm({ addFriend, user }) {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                 Birthday Day
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number"
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                type="number"
+                min="1" 
+                max="31"
                 value={newFriend.birthday.day}
                 onChange={(evt) => setNewFriend({...newFriend, birthday: {...newFriend.birthday, day: evt.target.value}})}
                 placeholder="Day"

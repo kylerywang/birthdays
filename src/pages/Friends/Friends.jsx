@@ -31,14 +31,14 @@ export default function Friends({friends, setFriends, user}) {
     return(
     <div>
         <div>
-            <div class="flex text-left text-xl m-4 mt-10">
+            <div class="flex text-left text-xl m-3 my-8">
                 <h1 class="font-bold">Add New Birthday</h1>
             </div>
             <NewFriendForm addFriend = {addFriend} user={user}/>
         </div>
         <div>
-            <div class="flex text-left text-xl m-4">
-                <h1 class="font-bold">My Friends</h1>
+            <div class="flex text-left text-xl m-2">
+                <h1 class="font-bold">Birthday Feed</h1>
             </div>
             <div className="rounded-lg border border-gray-200">
                 

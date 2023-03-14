@@ -17,7 +17,6 @@ export default function NavBar() {
                 </a>
                 <div class="flex items-center space-x-1">
                     <ul class="hidden space-x-2 md:inline-flex">
-                        <li><Link to="feed" className="px-4 py-2 font-semibold text-gray-600 rounded">Home</Link></li>
                         <li><Link to="/friends" className="px-4 py-2 font-semibold text-gray-600 rounded">Friends</Link></li>
                         <li><Link to="" className="px-4 py-2 font-semibold text-gray-600 rounded"onClick={handleLogOut}>Log Out</Link></li>
 

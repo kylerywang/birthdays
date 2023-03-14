@@ -4,7 +4,6 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { getUser } from '../../utilities/users-service'
 import * as friendsAPI from '../../utilities/friends-api'
 import AuthPage from '../AuthPage/AuthPage';
-import Feed from '../Feed/Feed';
 import NavBar from '../../components/NavBar/NavBar'
 import Friends from '../Friends/Friends';
 
@@ -20,7 +19,6 @@ export default function App() {
           <>
             <NavBar user={user} setUser={setUser}/>
             <Routes>
-              <Route path="/feed" element={<Feed friends={friends} setFriends={setFriends} user={user}/>} />
               <Route path="/friends" element={<Friends friends={friends} setFriends={setFriends} user={user}/>} />
               <Route path="/*" element={<Navigate to="/friends"/>}/>
             </Routes>
