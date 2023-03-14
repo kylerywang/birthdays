@@ -19,42 +19,69 @@ export default class SignUpForm extends Component {
   }
 
   handleSubmit = async (evt) => {
-      evt.preventDefault();
-      try {
-        const formData = {
-          name: this.state.name,
-          email: this.state.email,
-          phone: this.state.phone,
-          password: this.state.password,
-        }
-        const user = await signUp(formData)
-        this.props.setUser(user)
-      } catch {
-        this.setState({ error: 'Sign Up Failed - Try Again' })
+    evt.preventDefault();
+    console.log("handleSubmit() in SignUpForm")
+    try {
+      const formData = {
+        name: this.state.name,
+        email: this.state.email,
+        phone: this.state.phone,
+        password: this.state.password,
       }
-  } 
+      const user = await signUp(formData)
+      this.props.setUser(user)
+    } catch {
+      this.setState({ error: 'Sign Up Failed - Try Again' })
+    }
+  }
 
   render() {
     const disable = this.state.password !== this.state.confirm;
     return (
-      <div>
-        <div className="form-container">
-          <form autoComplete="off" onSubmit={this.handleSubmit}>
-            <label>Name</label>
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
-            <label>Email</label>
-            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-            <label>Phone</label>
-            <input type="tel" name="phone" value={this.state.phone} onChange={this.handleChange} required />
-            <label>Password</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-            <label>Confirm</label>
-            <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
-            <button type="submit" disabled={disable}>SIGN UP</button>
-          </form>
-        </div>
+      <div className="w-full max-w">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" autoComplete="off" onSubmit={this.handleSubmit}>
+          <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Name 
+              </label>
+              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" >
+                Email 
+              </label>
+              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" >
+                Phone 
+              </label>
+              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="tel" name="phone" value={this.state.phone} onChange={this.handleChange} required />
+            </div>
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Password
+              </label>
+              <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+              <p className="text-red-500 text-xs italic">Please choose a password.</p>
+            </div>
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Confirm
+              </label>
+              <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
+              <p className="text-red-500 text-xs italic">Please confirm your password.</p>
+            </div>
+            <div className="flex items-center justify-between">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={disable}>
+                Sign In
+              </button>
+            </div>
+        </form>
         <p className="error-message">&nbsp;{this.state.error}</p>
       </div>
+    
     );
   }
 }
+

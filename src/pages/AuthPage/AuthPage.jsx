@@ -3,10 +3,13 @@ import LoginForm from '../../components/LoginForm/LoginForm'
 
 export default function AuthPage({ setUser }) {
     return (
-        <main>
-            <h1>AuthPage</h1>
+        <div className="flex flex-col">
+            <div className="my-4">
             <SignUpForm setUser={setUser} />
+            </div>
+            <div className="my-4">
             <LoginForm setUser={setUser} />
-        </main>
+            </div>
+        </div>
     )
 }
