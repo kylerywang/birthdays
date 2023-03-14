@@ -22,10 +22,7 @@ export default function NewFriendForm({ addFriend, user }) {
     });
   }
   return (
-    <>
-    <div class="flex text-left text-xl my-4">
-        <h1 class="font-bold">Add New Birthday</h1>
-    </div>
+
     <form class="w-full" onSubmit={handleAddFriend}>
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
@@ -70,6 +67,5 @@ export default function NewFriendForm({ addFriend, user }) {
             </div>
         </div>
     </form>
-    </>
   );
 }

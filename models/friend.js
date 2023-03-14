@@ -30,24 +30,20 @@ friendSchema.virtual('nextBirthday').get(function(){
     return nextBirthday.toISOString();
   });
 
-// friendSchema.virtual('daysUntil').get(function(){
-//     return Math.floor((this.nextBirthday.getTime() - Date.now() )/ (1000 *60*60*24));
-// })
+friendSchema.virtual('daysUntil').get(function(){
+    return ((moment(this.nextBirthday).diff(moment(), 'days'))%365)
+    
+})
 
 
 
 //methods
 friendSchema.methods.requiresNotification = function(date) {
-    const currentTime = moment(date);
-    const friendBirthday =moment(this.nextBirthday)
-    let timeDiffInMinutes = Math.round(moment.duration(friendBirthday.diff(currentTime)).asMinutes());
-    let timeDiffInDays = friendBirthday.diff(currentTime, 'days')
-    timeDiffInDays = timeDiffInDays % 365;
-    console.log(`${this.name}'s this.nextBirthday`, this.nextBirthday)
-    console.log(`${this.name}'s friendBirthday`, friendBirthday)
-    console.log(`${timeDiffInDays} days until ${this.name}'s birthday.`)
-    return timeDiffInDays === 0;
+
+    console.log(`${this.daysUntil} days until ${this.name}'s birthday.`)
+    return this.daysUntil === 0;
   };
+
 
 friendSchema.statics.sendNotifications = function(callback) {
     const searchDate = new Date();

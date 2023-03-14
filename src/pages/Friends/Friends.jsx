@@ -30,14 +30,24 @@ export default function Friends({friends, setFriends, user}) {
 
     return(
     <div>
-        <NewFriendForm addFriend = {addFriend} user={user}/>
-        <h1>Friends</h1>
-        <div className="rounded-lg border border-gray-200">
-            <ul>
-                {friends.map((friend)=>(
-                    <FriendCard friend={friend} key={friend.id} deleteFriend={deleteFriend}/>
-                ))}
-            </ul>
+        <div>
+            <div class="flex text-left text-xl m-4 mt-10">
+                <h1 class="font-bold">Add New Birthday</h1>
+            </div>
+            <NewFriendForm addFriend = {addFriend} user={user}/>
+        </div>
+        <div>
+            <div class="flex text-left text-xl m-4">
+                <h1 class="font-bold">My Friends</h1>
+            </div>
+            <div className="rounded-lg border border-gray-200">
+                
+                <ul>
+                    {friends.map((friend)=>(
+                        <FriendCard friend={friend} key={friend.id} deleteFriend={deleteFriend}/>
+                    ))}
+                </ul>
+            </div>
         </div>
     </div>
     )
